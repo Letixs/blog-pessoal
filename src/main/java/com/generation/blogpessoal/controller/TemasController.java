@@ -42,6 +42,11 @@ public class TemasController {
 				.orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
 	}
 	
+	@GetMapping("/tema/{tema}")
+	public ResponseEntity<List<Temas>> getByTema(@PathVariable String tema){
+		return ResponseEntity.ok(temasRepository.findAllByTemaContainingIgnoreCase(tema));
+	}
+	
 	@PostMapping
 	public ResponseEntity<Temas> post(@Valid @RequestBody Temas tema){
 		return ResponseEntity.status(HttpStatus.CREATED)
